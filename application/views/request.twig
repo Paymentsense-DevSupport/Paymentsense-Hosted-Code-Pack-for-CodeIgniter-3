@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="{{ base_url }}">
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/default.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="page-header">
+        <h1>{{ software_title }} <small>v{{ software_version }}</small></h1>
+    </div>
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <h4>{{ subtitle }}</h4>
+            <form id="request_form" class="form-horizontal" action="{{ payment_form_url }}">
+{% for form_name, form_details in form %}
+                <div class="form-group">
+                    <label class="col-sm-3 control-label small" for="{{ form_name }}">{{ form_details.name }}</label>
+                    <div class="col-sm-8">
+{% if form_details.type == 'select' %}
+                        <select class="form-control" id="{{ form_name }}" name="{{ form_name }}" >
+{% for name, value in form_details.options %}
+                            <option value="{{ value|e }}">{{ name|e }}</option>
+{% endfor %}
+                        </select>
+{% elseif form_details.type == 'input' %}
+                        <input type="text" placeholder="{{ form_details.placeholder|e }}" id="{{ form_name }}" name="{{ form_name }}" class="form-control" maxlength="256" value="{{ form_details.value }}" {% if form_details.required %} required{% endif %}{% if form_details.readonly %} readonly{% endif %}>
+{% elseif form_details.type == 'textarea' %}
+                        <textarea placeholder="{{ form_details.placeholder|e }}" id="{{ form_name }}" name="{{ form_name }}" class="form-control" {% if form_details.required %}required="required" {% endif %}maxlength="256"></textarea>
+{% endif %}
+                    </div>
+                    <div class="col-sm-1">
+{% if form_name == 'TransactionDateTime' %}
+                        <button id="update_trx_datetime" class="btn" type="button"><i class="glyphicon glyphicon-refresh"></i></button>
+{% endif %}
+                    </div>
+                </div>
+{% endfor %}
+                <div class="button_section ">
+                <div class="col-sm-3">
+                </div>
+                <div class="col-sm-9">
+                    <button class="btn btn-primary" type="submit">Submit Form Data to Paymentsense Gateway</button>
+                </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="{{ base_url }}">
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/default.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="page-header">
+        <h1>{{ software_title }} <small>v{{ software_version }}</small></h1>
+    </div>
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="text-left">
+{% for response in responses %}
+                <h4>{{ response.subtitle }}</h4>
+{% if response.data %}
+                <form id="response_form" class="form-horizontal">
+{% for form_key, form_value in response.data %}
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label small" for="{{ form_key }}"> {{ form_key }} </label>
+                        <div class="col-sm-8">
+                            <input type="text" id="{{ form_key }}" name="{{ form_key }}" class="form-control" value="{{ form_value }}" readonly>
+                        </div>
+                        <div class="col-sm-1">
+                        </div>
+                    </div>
+{% endfor %}
+                </form>
+{% endif %}
+{% endfor %}
+            </div>
+            <div class="button_section text-center">
+                <button class="btn btn-default" type="button" onclick="location.href = '{{ base_url }}';">Back to Request Form</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

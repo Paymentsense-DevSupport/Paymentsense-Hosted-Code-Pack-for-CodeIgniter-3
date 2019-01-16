@@ -1,0 +1,36 @@
+.page-header
+{
+  margin: 20px 0 20px;
+  color: #444444;
+  font-weight: 400;
+  border-bottom-color: #AAAAAA;
+}
+
+.page-header h1
+{
+  font-size: 160%;
+  color: #444444;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.container
+{
+  margin-bottom: 60px;
+}
+
+h4
+{
+  margin-bottom: 40px;
+}
+
+.form-control
+{
+  border-color: #AAAAAA;
+  padding: 2px 6px 2px 6px;
+}
+
+.button_section
+{
+  margin-top: 30px;
+}
